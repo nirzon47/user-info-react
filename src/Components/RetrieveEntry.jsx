@@ -31,7 +31,7 @@ const RetrieveEntry = () => {
 		<section className='p-6'>
 			<PageHeading title='Retrieve Information' />
 			<h3 className='text-xl font-semibold mb-4'>Enter Aadhar Number</h3>
-			<form className='flex gap-4 mb-8'>
+			<form className='flex gap-4 mb-8 items-center flex-wrap'>
 				<input
 					type='number'
 					inputMode='numeric'
