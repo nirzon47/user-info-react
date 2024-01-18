@@ -8,6 +8,12 @@ const RetrieveEntry = () => {
 	const [searchResult, setSearchResult] = useState([])
 	const [searched, setSearched] = useState(false)
 
+	/**
+	 * Handles the click event for the retrieve button.
+	 *
+	 * @param {object} e - The event object.
+	 * @return {void}
+	 */
 	const handleRetrieveClick = (e) => {
 		e.preventDefault()
 		setSearched(true)

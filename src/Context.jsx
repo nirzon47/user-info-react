@@ -1,7 +1,16 @@
-import { useState, createContext } from 'react'
+import { useState, createContext, useContext } from 'react'
 
 const DataContext = createContext()
+export const useDataContext = () => {
+	return useContext(DataContext)
+}
 
+/**
+ * Creates a data provider component that manages data and provides it to its children.
+ *
+ * @param {object} prop - The prop object containing the children component.
+ * @return {JSX.Element} The data provider component.
+ */
 const DataProvider = (prop) => {
 	const children = prop.children
 	const [data, setData] = useState(
