@@ -1,10 +1,15 @@
+import AddEntry from './Components/AddEntry'
 import Header from './Components/Header'
+import { DataProvider } from './Context'
 
 const App = () => {
 	return (
-		<>
-			<Header />
-		</>
+		<DataProvider>
+			<div className='min-h-screen w-screen'>
+				<Header />
+				<AddEntry />
+			</div>
+		</DataProvider>
 	)
 }
 
