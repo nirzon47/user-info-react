@@ -1,4 +1,8 @@
+import { Link, useLocation } from 'react-router-dom'
+
 const Header = () => {
+	const location = useLocation()
+
 	return (
 		<div>
 			<header className='bg-base-300 p-4'>
@@ -7,14 +11,24 @@ const Header = () => {
 			<nav className='flex justify-center items-center mt-4'>
 				<ul className='flex gap-x-6 gap-y-2 flex-wrap justify-center items-center'>
 					<li>
-						<button className='btn btn-secondary w-48'>
-							Add new entry
-						</button>
+						<Link to='/'>
+							<button
+								className='btn btn-secondary w-48'
+								disabled={location.pathname === '/'}
+							>
+								Add new entry
+							</button>
+						</Link>
 					</li>
 					<li>
-						<button className='btn btn-accent w-48'>
-							Retrieve Information
-						</button>
+						<Link to='/retrieve'>
+							<button
+								className='btn btn-accent w-48'
+								disabled={location.pathname === '/retrieve'}
+							>
+								Retrieve Information
+							</button>
+						</Link>
 					</li>
 				</ul>
 			</nav>

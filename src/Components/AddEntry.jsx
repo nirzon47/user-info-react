@@ -23,6 +23,7 @@ const AddEntry = () => {
 		}
 
 		setAdhaar(event.target.value)
+		setInputError(false)
 	}
 
 	const handlePhoneChange = (event) => {
@@ -35,13 +36,15 @@ const AddEntry = () => {
 		}
 
 		setPhone(event.target.value)
+		setInputError(false)
 	}
 
 	const toggleInput = () => {
 		setShowInput(!showInput)
 	}
 
-	const getAge = (dob) => {
+	const getAge = () => {
+		console.log(dob)
 		const today = new Date()
 		const birthDate = new Date(dob)
 		let age = today.getFullYear() - birthDate.getFullYear()
