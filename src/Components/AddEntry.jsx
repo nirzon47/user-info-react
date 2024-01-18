@@ -11,7 +11,6 @@ const AddEntry = () => {
 	const [dob, setDob] = useState('')
 	const [adhaar, setAdhaar] = useState('')
 	const [phone, setPhone] = useState('')
-	const [inputError, setInputError] = useState(false)
 
 	/**
 	 * Handles the change event for the Adhaar input field.
@@ -23,12 +22,7 @@ const AddEntry = () => {
 			event.target.value = event.target.value.slice(0, 12)
 		}
 
-		if (event.target.value.length < 12) {
-			setInputError(true)
-		}
-
 		setAdhaar(event.target.value)
-		setInputError(false)
 	}
 
 	/**
@@ -41,12 +35,7 @@ const AddEntry = () => {
 			event.target.value = event.target.value.slice(0, 10)
 		}
 
-		if (event.target.value.length < 10) {
-			setInputError(true)
-		}
-
 		setPhone(event.target.value)
-		setInputError(false)
 	}
 
 	/**
@@ -92,7 +81,7 @@ const AddEntry = () => {
 			return
 		}
 
-		if (inputError) {
+		if (adhaar.length !== 12 || phone.length !== 10) {
 			alert(
 				'Adhaar Number must be 12 digits long and Phone Number must be 10 digits long'
 			)
@@ -114,7 +103,6 @@ const AddEntry = () => {
 		setAdhaar('')
 		setPhone('')
 		setShowInput(false)
-		setInputError(false)
 	}
 
 	return (
