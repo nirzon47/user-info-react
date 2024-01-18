@@ -1,25 +1,49 @@
 import PageHeading from './PageHeading'
 import { DataContext } from '../Context'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { nanoid } from 'nanoid'
 
 const AddEntry = () => {
 	const context = useContext(DataContext)
 
 	const [showInput, setShowInput] = useState(false)
+	const [name, setName] = useState('')
+	const [dob, setDob] = useState('')
+	const [adhaar, setAdhaar] = useState('')
+	const [phone, setPhone] = useState('')
+	const [inputError, setInputError] = useState(false)
 
-	const nameRef = useRef()
-	const dobRef = useRef()
-	const adhaarRef = useRef()
-	const phoneRef = useRef()
+	const handleAdhaarChange = (event) => {
+		if (event.target.value.length > 12) {
+			event.target.value = event.target.value.slice(0, 12)
+		}
+
+		if (event.target.value.length < 12) {
+			setInputError(true)
+		}
+
+		setAdhaar(event.target.value)
+	}
+
+	const handlePhoneChange = (event) => {
+		if (event.target.value.length > 10) {
+			event.target.value = event.target.value.slice(0, 10)
+		}
+
+		if (event.target.value.length < 10) {
+			setInputError(true)
+		}
+
+		setPhone(event.target.value)
+	}
 
 	const toggleInput = () => {
 		setShowInput(!showInput)
 	}
 
-	const getAge = (dateString) => {
+	const getAge = (dob) => {
 		const today = new Date()
-		const birthDate = new Date(dateString)
+		const birthDate = new Date(dob)
 		let age = today.getFullYear() - birthDate.getFullYear()
 		const month = today.getMonth() - birthDate.getMonth()
 
@@ -31,11 +55,21 @@ const AddEntry = () => {
 	}
 
 	const addData = () => {
-		const name = nameRef.current.value
-		const dob = dobRef.current.value
-		const adhaar = adhaarRef.current.value
-		const phone = phoneRef.current.value
-		const age = getAge(dob)
+		const age = getAge()
+
+		if (!name || !dob || !adhaar || !phone) {
+			alert('Please fill all the fields')
+
+			return
+		}
+
+		if (inputError) {
+			alert(
+				'Adhaar Number must be 12 digits long and Phone Number must be 10 digits long'
+			)
+
+			return
+		}
 
 		context.updateData({
 			id: nanoid(),
@@ -46,10 +80,12 @@ const AddEntry = () => {
 			age,
 		})
 
-		nameRef.current.value = ''
-		dobRef.current.value = ''
-		adhaarRef.current.value = ''
-		phoneRef.current.value = ''
+		setName('')
+		setDob('')
+		setAdhaar('')
+		setPhone('')
+		setShowInput(false)
+		setInputError(false)
 	}
 
 	return (
@@ -75,36 +111,38 @@ const AddEntry = () => {
 							<tr>
 								<td>
 									<input
-										ref={nameRef}
 										type='text'
 										className='input input-bordered input-sm'
+										value={name}
+										onChange={(e) => setName(e.target.value)}
 									/>
 								</td>
 								<td>
 									<input
-										ref={dobRef}
 										type='date'
 										className='input input-bordered input-sm'
+										value={dob}
+										onChange={(e) => setDob(e.target.value)}
 									/>
 								</td>
 								<td>
 									<input
-										ref={adhaarRef}
+										type='number'
+										inputMode='numeric'
+										className='input input-bordered input-sm w-11/12 pr-0'
+										value={adhaar}
+										onChange={handleAdhaarChange}
+									/>
+								</td>
+								<td>
+									<input
 										type='number'
 										inputMode='numeric'
 										className='input input-bordered input-sm w-11/12 pr-0'
 										min={1000000000}
 										max={9999999999}
-									/>
-								</td>
-								<td>
-									<input
-										ref={phoneRef}
-										type='number'
-										inputMode='numeric'
-										className='input input-bordered input-sm w-11/12 pr-0'
-										min={1000000000}
-										max={9999999999}
+										value={phone}
+										onChange={handlePhoneChange}
 									/>
 								</td>
 								<td></td>
