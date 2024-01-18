@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid'
 
 const AddEntry = () => {
 	const context = useContext(DataContext)
-	console.log(context.data)
+
 	const [showInput, setShowInput] = useState(false)
 
 	const nameRef = useRef()
@@ -128,7 +128,7 @@ const AddEntry = () => {
 								<td>
 									<button
 										className='btn btn-error btn-sm'
-										onClick={() => context.updateData(user)}
+										onClick={() => context.removeData(user.id)}
 									>
 										Delete
 									</button>

@@ -17,10 +17,17 @@ const DataProvider = (prop) => {
 		setData(newDataArray)
 	}
 
-	console.log(data)
+	const removeData = (id) => {
+		const newDataArray = [...data]
+		const index = newDataArray.findIndex((item) => item.id === id)
+		newDataArray.splice(index, 1)
+
+		localStorage.setItem('userData', JSON.stringify(newDataArray))
+		setData(newDataArray)
+	}
 
 	return (
-		<DataContext.Provider value={{ data, updateData }}>
+		<DataContext.Provider value={{ data, updateData, removeData }}>
 			{children}
 		</DataContext.Provider>
 	)
