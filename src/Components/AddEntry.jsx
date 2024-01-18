@@ -54,7 +54,6 @@ const AddEntry = () => {
 	 * @return {number} The age calculated based on the current date and the date of birth.
 	 */
 	const getAge = () => {
-		console.log(dob)
 		const today = new Date()
 		const birthDate = new Date(dob)
 		let age = today.getFullYear() - birthDate.getFullYear()
@@ -108,7 +107,7 @@ const AddEntry = () => {
 	return (
 		<section className='p-6'>
 			<PageHeading title='Add Entry' />
-			<button className='btn btn-primary btn-sm mb-4' onClick={toggleInput}>
+			<button className='mb-4 btn btn-primary btn-sm' onClick={toggleInput}>
 				{!showInput ? 'Click to add new data' : 'Close the form'}
 			</button>
 			<div className='overflow-x-auto'>
@@ -146,7 +145,7 @@ const AddEntry = () => {
 									<input
 										type='number'
 										inputMode='numeric'
-										className='input input-bordered input-sm w-11/12 pr-0'
+										className='w-11/12 pr-0 input input-bordered input-sm'
 										value={adhaar}
 										onChange={handleAdhaarChange}
 									/>
@@ -155,7 +154,7 @@ const AddEntry = () => {
 									<input
 										type='number'
 										inputMode='numeric'
-										className='input input-bordered input-sm w-11/12 pr-0'
+										className='w-11/12 pr-0 input input-bordered input-sm'
 										min={1000000000}
 										max={9999999999}
 										value={phone}
@@ -193,7 +192,7 @@ const AddEntry = () => {
 					</tbody>
 				</table>
 				{context.data.length === 0 && (
-					<h2 className='text-center text-3xl font-bold py-20 text-error'>
+					<h2 className='py-20 text-3xl font-bold text-center text-error'>
 						No data
 					</h2>
 				)}

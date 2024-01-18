@@ -1,4 +1,5 @@
 import AddEntry from './Components/AddEntry'
+import Error from './Components/Error'
 import Layout from './Components/Layout'
 import RetrieveEntry from './Components/RetrieveEntry'
 import { DataProvider } from './Context'
@@ -18,6 +19,7 @@ const router = createBrowserRouter([
 				element: <RetrieveEntry />,
 			},
 		],
+		errorElement: <Error />,
 	},
 ])
 
